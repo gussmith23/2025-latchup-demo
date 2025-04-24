@@ -1,0 +1,16 @@
+lakeroad \
+ --verilog-module-filepath example.sv \
+ --top-module-name presubmul_3_stage_unsigned_16_bit \
+ --architecture xilinx-ultrascale-plus \
+ --template dsp \
+ --initiation-interval 3 \
+ --verilog-module-out-signal out:16 \
+ --clock-name clk \
+ --input-signal a:16 \
+ --input-signal b:16 \
+ --input-signal d:16 \
+ --bitwuzla --stp --yices --cvc5 \
+ --timeout 90 \
+ --extra-cycles 2 \
+ --out-format verilog \
+ --module-name presubmul_3_stage_unsigned_16_bit

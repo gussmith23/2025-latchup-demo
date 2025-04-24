@@ -49,6 +49,9 @@ lakeroad --help
 
 ### Using Lakeroad from the Command Line
 
-To map our design using Lakeroad, 
+To map our design using Lakeroad, we can use the following command:
+```sh
+
+```
 
 ### Using Lakeroad via Yosys

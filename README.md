@@ -18,6 +18,7 @@ Lakeroad is currently more stable than Churchroad. Eventually, Churchroad will c
 
 Imagine you're building a hardware design targeting Xilinx UltraScale+ FPGAs. Your design includes the following hardware module:
 
+[`./sub_mul.sv`](./sub_mul.sv):
 ```sv
 module sub_mul(
   input clk,
@@ -42,7 +43,25 @@ You'd like to map this module to the UltraScale+ DSP:
 
 ![DSP48E2](assets/DSP48E2.png)
 
-Rather than configuring the DSP yourself, you'd like to use Vivado to configure it automatically (a process often called "inference"). However, when you go to map this design using Vivado, you find that it uses more than just a single DSP. Inefficient!
+Rather than configuring the DSP yourself, you'd like to use Vivado to configure it automatically (a process often called "inference"). Thus, you run Vivado:
+
+```sh
+vivado -mode batch -source vivado/synth_script.tcl
+```
+
+However, when you go to map this design using Vivado, you find that it uses more than just a single DSP. See this table from the utilization report:
+
+```
++----------+------+---------------------+
+| Ref Name | Used | Functional Category |
++----------+------+---------------------+
+| DSP48E2  |    2 |          Arithmetic |
++----------+------+---------------------+
+```
+
+An example of the full synthesized output can be seen at [`./vivado/vivado.out`](./vivado/vivado_out.sv).
+
+Now what? Well, the only option at this point is to attempt to configure the DSP ourselves.
 
 ## Lakeroad
 

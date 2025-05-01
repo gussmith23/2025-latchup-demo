@@ -46,7 +46,7 @@ You'd like to map this module to the UltraScale+ DSP:
 Rather than configuring the DSP yourself, you'd like to use Vivado to configure it automatically (a process often called "inference"). Thus, you run Vivado:
 
 ```sh
-vivado -mode batch -source vivado/synth_script.tcl
+vivado -mode batch -source using_vivado/synth_script.tcl
 ```
 
 However, when you go to map this design using Vivado, you find that it uses more than just a single DSP. See this table from the utilization report:

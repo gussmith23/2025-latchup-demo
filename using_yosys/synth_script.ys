@@ -1,0 +1,4 @@
+read_verilog -sv ../example-yosys-annotations.sv
+hierarchy -top presubmul_3_stage_unsigned_16_bit
+lakeroad presubmul_3_stage_unsigned_16_bit
+write_verilog 

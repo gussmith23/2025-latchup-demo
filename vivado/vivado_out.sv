@@ -1,7 +1,7 @@
 // Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2022.1 (lin64) Build 3526262 Mon Apr 18 15:47:01 MDT 2022
-// Date        : Thu May  1 12:43:31 2025
+// Date        : Thu May  1 12:47:46 2025
 // Host        : jura running 64-bit Ubuntu 20.04.6 LTS
 // Command     : write_verilog -force /home/gussmith/2025-latchup-demo/vivado/vivado_out.sv
 // Design      : sub_mul
@@ -12,7 +12,8 @@
 // --------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* NETLIST_CHECKSUM = "cd0a0d52" *) (* use_dsp = "yes" *) 
+(* NETLIST_CHECKSUM = "cd0a0d52" *) (* architecture = "xilinx-ultrascale-plus" *) (* pipeline_depth = "3" *) 
+(* template = "dsp" *) (* use_dsp = "yes" *) 
 (* STRUCTURAL_NETLIST = "yes" *)
 module sub_mul
    (clk,
@@ -20,11 +21,11 @@ module sub_mul
     b,
     d,
     out);
-  input clk;
-  input [15:0]a;
-  input [15:0]b;
-  input [15:0]d;
-  output [15:0]out;
+  (* clk = "1" *) input clk;
+  (* data = "1" *) input [15:0]a;
+  (* data = "1" *) input [15:0]b;
+  (* data = "1" *) input [15:0]d;
+  (* out = "1" *) output [15:0]out;
 
   wire \<const0> ;
   wire \<const1> ;

@@ -1,7 +1,20 @@
+// Vivado annotation
 (* use_dsp = "yes" *)
+// Lakeroad annotations
+(* template = "dsp" *)
+(* architecture = "xilinx-ultrascale-plus" *)
+(* pipeline_depth = 3 *)
 module sub_mul(
+	// Lakeroad annotations
+	(* clk *)
   input clk,
-	input  [15:0] a, b, d,
+	(* data *)
+	input  [15:0] a,
+	(* data *)
+	input  [15:0] b,
+	(* data *)
+	input  [15:0] d,
+	(* out *)
 	output [15:0] out
 );
 

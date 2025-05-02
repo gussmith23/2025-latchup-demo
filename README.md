@@ -282,6 +282,28 @@ This makes Lakeroad even more convenient to use within existing flows.
 
 ## Churchroad
 
+You need Rust installed for this to work. You can install Rust with:
+```sh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+```sh
+git clone https://github.com/gussmith23/churchroad
+make -C churchroad/yosys-plugin
+cargo build --manifest-path churchroad/Cargo.toml
+```
+
+s
+```sh
+CHURCHROAD="cargo run --manifest-path churchroad/Cargo.toml -- " \
+yosys -m "churchroad/yosys-plugin/churchroad.so" -p "
+ read_verilog %s;
+ hierarchy -top mul;
+ churchroad mul;
+ proc;
+ write_verilog"
+```
+
 ## What's Next?
 
 I plan to continue developing Lakeroad and Churchroad. Some future goals:

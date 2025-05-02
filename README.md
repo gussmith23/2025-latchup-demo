@@ -282,10 +282,59 @@ This makes Lakeroad even more convenient to use within existing flows.
 
 ## Churchroad
 
+Currently, Lakeroad only supports very small modules---mostly modules mapping to a single DSP. To make Lakeroad more generally useful, we are building Churchroad, a tool which uses multiple calls to Lakeroad to synthesize a larger design.
+
+Consider this simple multiply:
+```sv
+module mul(input [15:0] a, input [31:0] b, output [31:0] out);
+  assign out = a * b;
+endmodule
+```
+
+This design is too large to fit on a single DSP on Xilinx UltraScale+, and thus Lakeroad will struggle to map it.
+
+We can synthesize the design with Yosys:
+
+```sh
+yosys -p "
+  read_verilog -sv wide_mul.sv
+  hierarchy -top mul
+  synth_xilinx -top mul -family xcup
+  xilinx_dsp
+  stat
+"
+```
+
+We'll see that Yosys again uses extra logic in the form of CARRY4 and LUT2:
+
+```
+=== mul ===
+
+   Number of wires:                 15
+   Number of wire bits:            381
+   Number of public wires:           3
+   Number of public wire bits:      80
+   Number of ports:                  3
+   Number of port bits:             80
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                101
+     CARRY4                          4
+     DSP48E2                         2
+     IBUF                           48
+     LUT2                           15
+     OBUF                           32
+```
+
+Instead, let's use Churchroad to map the design.
+
 You need Rust installed for this to work. You can install Rust with:
 ```sh
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
+
+Now we can clone and build Churchroad. For future readers of this demo, you can check out Churchroad at [this tag](https://github.com/gussmith23/churchroad/releases/tag/2025-latch-up).
 
 ```sh
 git clone https://github.com/gussmith23/churchroad
@@ -293,15 +342,35 @@ make -C churchroad/yosys-plugin
 cargo build --manifest-path churchroad/Cargo.toml
 ```
 
-s
+Note that, like Lakeroad, Churchroad is also integrated as a plugin in Yosys.
+
 ```sh
+RUST_LOG=debug \
 CHURCHROAD="cargo run --manifest-path churchroad/Cargo.toml -- " \
+PATH="$LAKEROAD_RELEASE_DIR/deps/cvc5/bin/:$LAKEROAD_RELEASE_DIR/deps/bitwuzla/bin/:$PATH" \
 yosys -m "churchroad/yosys-plugin/churchroad.so" -p "
- read_verilog %s;
- hierarchy -top mul;
- churchroad mul;
- proc;
- write_verilog"
+ read_verilog wide_mul.sv
+ hierarchy -top mul
+ churchroad mul
+ proc
+ write_verilog using_churchroad/churchroad_out.sv
+ stat"
+```
+
+```
+=== mul ===
+
+   Number of wires:                 30
+   Number of wire bits:            842
+   Number of public wires:          17
+   Number of public wire bits:     493
+   Number of ports:                  3
+   Number of port bits:             80
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  2
+     DSP48E2                         2
 ```
 
 ## What's Next?

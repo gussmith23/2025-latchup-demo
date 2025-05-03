@@ -162,6 +162,8 @@ Then, add Lakeroad to your PATH:
 export PATH="$LAKEROAD_RELEASE_DIR/bin:$PATH"
 ```
 
+Mac users: run the `activate` script to un-quarantine the binaries.
+
 Now, you should have Lakeroad available for use:
 
 ```sh

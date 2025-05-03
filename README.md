@@ -150,7 +150,7 @@ And for an added bonus, these tools have other issues as well, beyond the mappin
 Lakeroad is a technology mapper for programmable hardware primitives, meant more completely use all features of primitives like DSPs. 
 
 To use Lakeroad, download a release from its releases page:
-https://github.com/gussmith23/lakeroad/releases
+<https://github.com/gussmith23/lakeroad/releases/tag/v0.1.5>
 
 Unzip the release, and for convenience, set the following variable:
 ```sh

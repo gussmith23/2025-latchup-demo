@@ -17,6 +17,12 @@ Lakeroad is currently more stable than Churchroad. Eventually, Churchroad will c
 
 This demo first describes the issue with existing technology mappers, and then demonstrates how Lakeroad fills those holes.
 
+Before following the demo, be sure to clone it:
+```sh
+git clone https://github.com/gussmith23/2025-latchup-demo
+cd 2025-latchup-demo
+```
+
 ## What's the Problem?
 
 Imagine you're building a hardware design targeting Xilinx UltraScale+ FPGAs. Your design includes the following hardware module:
@@ -67,7 +73,19 @@ An example of the full synthesized output can be seen at [`./vivado/vivado.out`]
 
 Now what? Well, we could attempt synthesis with another tool, for example, the open-source compiler Yosys.
 
-(If you don't already have Yosys installed, you can quickly build and install a version of Yosys locally using the following script:)
+You can install Yosys on Ubuntu with:
+
+```sh
+sudo apt-get install yosys-dev
+```
+or on Mac:
+
+```sh
+brew install yosys
+```
+
+If you need to build it from source, you can do so fairly quickly:
+
 ```sh
 git clone --recurse-submodules https://github.com/YosysHQ/yosys.git
 cd yosys

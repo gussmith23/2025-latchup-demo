@@ -377,6 +377,8 @@ yosys -m "churchroad/yosys-plugin/churchroad.so" -p "
  stat"
 ```
 
+Viewing the results, we see that Churchroad maps the design to two DSPs, producing a more efficient mapping than Yosys alone:
+
 ```
 === mul ===
 
@@ -393,8 +395,15 @@ yosys -m "churchroad/yosys-plugin/churchroad.so" -p "
      DSP48E2                         2
 ```
 
-## What's Next?
+## In Conclusion
+
+Lakeroad is a new FPGA technology mapper designed for programmable primitives like DSPs. Please use it on your design and submit GitHub issues when it breaks.
+
+Churchroad is the successor to Lakeroad, and though it is currently only a prototype, it is showing early promise towards mapping larger designs needing many DSPs.
 
 I plan to continue developing Lakeroad and Churchroad. Some future goals:
-- Support for more FPGA backends (currently supports Xilinx 7-series and UltraScale+, Lattice ECP5, and some Intel FPGAs)
-- Support for ASIC mapping
+- **Support for more FPGA backends.** Lakeroad currently supports Xilinx 7-series and UltraScale+, Lattice ECP5, and some Intel FPGAs. If you have an interesting FPGA backend you'd like to map to, please contact me!
+- **Support for ASIC/standard cell library mapping.**
+- **Integrating other synthesis tools.** Ideally, Churchroad would combine new tools like Lakeroad with traditional tools like ABC, which are better for e.g. LUT mapping.
+
+Thank you for trying Lakeroad and Churchroad!

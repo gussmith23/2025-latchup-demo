@@ -363,7 +363,7 @@ cargo build --manifest-path churchroad/Cargo.toml
 Note that, like Lakeroad, Churchroad is also integrated as a plugin in Yosys.
 
 ```sh
-RUST_LOG=debug \
+RUST_LOG=churchroad=debug \
 CHURCHROAD="cargo run --manifest-path churchroad/Cargo.toml -- " \
 PATH="$LAKEROAD_RELEASE_DIR/deps/cvc5/bin/:$LAKEROAD_RELEASE_DIR/deps/bitwuzla/bin/:$PATH" \
 yosys -m "churchroad/yosys-plugin/churchroad.so" -p "

@@ -31,19 +31,19 @@ Imagine you're building a hardware design targeting Xilinx UltraScale+ FPGAs. Yo
 ```sv
 module sub_mul(
   input clk,
-	input  [15:0] a, b, d,
-	output [15:0] out
+  input  [15:0] a, b, d,
+  output [15:0] out
 );
 
-	logic [31:0] stage0, stage1, stage2;
+  logic [31:0] stage0, stage1, stage2;
 
-	always @(posedge clk) begin
-	  stage0 <= (d - a) * b;
-	  stage1 <= stage0;
-	  stage2 <= stage1;
-	end
+  always @(posedge clk) begin
+    stage0 <= (d - a) * b;
+    stage1 <= stage0;
+    stage2 <= stage1;
+  end
 
-	assign out = stage2;
+  assign out = stage2;
 
 endmodule
 ```
@@ -241,27 +241,27 @@ Instead of needing to call Lakeroad using the cumbersome command line interface,
 (* architecture = "xilinx-ultrascale-plus" *)
 (* pipeline_depth = 3 *)
 module sub_mul(
-	(* clk *)
+  (* clk *)
   input clk,
-	(* data *)
-	input  [15:0] a,
-	(* data *)
-	input  [15:0] b,
-	(* data *)
-	input  [15:0] d,
-	(* out *)
-	output [15:0] out
+  (* data *)
+  input  [15:0] a,
+  (* data *)
+  input  [15:0] b,
+  (* data *)
+  input  [15:0] d,
+  (* out *)
+  output [15:0] out
 );
 
-	logic [31:0] stage0, stage1, stage2;
+  logic [31:0] stage0, stage1, stage2;
 
-	always @(posedge clk) begin
-	  stage0 <= (d - a) * b;
-	  stage1 <= stage0;
-	  stage2 <= stage1;
-	end
+  always @(posedge clk) begin
+    stage0 <= (d - a) * b;
+    stage1 <= stage0;
+    stage2 <= stage1;
+  end
 
-	assign out = stage2;
+  assign out = stage2;
 
 endmodule
 ```
